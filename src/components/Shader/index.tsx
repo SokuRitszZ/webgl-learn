@@ -1,24 +1,30 @@
 import { onMount } from 'solid-js';
-import GLRenderer from 'gl-renderer';
+import createRegl, { Regl } from 'regl';
 
 interface Props {
-  vertexShader: string;
-  fragmentShader: string;
-  // 类型治理
-  onInit?: (renderer: any) => void;
+  onInit?: (regl: Regl) => void;
 }
 
-export const Shader = ({ vertexShader, fragmentShader, onInit }: Props) => {
+
+export const Shader = ({ onInit }: Props) => {
   let canvasRef: HTMLCanvasElement;
   
   onMount(() => {
-    const renderer = new GLRenderer(canvasRef);
-    const program = renderer.compileSync(vertexShader, fragmentShader);
-    renderer.useProgram(program);
-    onInit?.(renderer);
+    const regl = createRegl(canvasRef);
+    regl.clear({
+      color: [0, 0, 0, 0],
+      depth: 1,
+    });
+
+    // regl({
+    //   vert: vertexShader,
+    //   frag: fragmentShader,
+    // });
+
+    onInit?.(regl);
   });
 
   return (
-    <canvas ref={el => canvasRef = el} class={'w-500px h-500px'} />
+    <canvas ref={el => canvasRef = el} width={512} height={512} />
   );
 };

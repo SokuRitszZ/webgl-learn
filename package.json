@@ -12,6 +12,7 @@
     "@types/lodash": "^4.14.202",
     "gl-renderer": "^0.14.0",
     "lodash-es": "^4.17.21",
+    "regl": "^2.1.0",
     "solid-js": "^1.8.7"
   },
   "devDependencies": {

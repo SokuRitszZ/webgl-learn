@@ -1,8 +1,8 @@
 import { createSignal } from 'solid-js';
-import { CellsShaders, CircleShader } from './shaders';
+import { CellsShaders, CircleShader, StartupShader } from './shaders';
 
 function App() {
-  const MAX_COUNT = 2;
+  const MAX_COUNT = 3;
   const [step, setStep] = createSignal(0);
 
   const handlePrev = () => {
@@ -21,6 +21,9 @@ function App() {
       }
       {step() === 1 && 
         <CircleShader />
+      }
+      {step() === 2 && 
+        <StartupShader />
       }
       <button onClick={handleNext}>R</button>
     </div>
